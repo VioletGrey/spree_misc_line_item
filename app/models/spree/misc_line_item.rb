@@ -46,16 +46,16 @@ class Spree::MiscLineItem < ActiveRecord::Base
   alias display_amount money
 
   def sufficient_stock?
-    self.has_variant? ? Stock::Quantifier.new(self.lineitemeable_id).can_supply?(quantity) : true
+    self.has_variant? ? Spree::Stock::Quantifier.new(self.lineitemeable_id).can_supply?(quantity) : true
   end
 
   def insufficient_stock?
     !sufficient_stock?
   end
 
-  def insert_in_shipment(shipment)
-    if self.has_variant?
-      Spree::OrderInventory.new(self.order).send(:add_to_shipment, shipment, self.lineitemeable, self.quantity)
+  def unstock(shipment)
+    if self.has_variant? && self.order.completed?
+      shipment.stock_location.unstock(lineitemeable, self.quantity, shipment)
     end
   end
 end
