@@ -9,9 +9,13 @@ class Spree::MiscLineItem < ActiveRecord::Base
 
   def copy_price
     if self.has_variant?
-      self.variant_price = lineitemeable.variant_price if self.variant_price.nil?
-      self.variant_price = lineitemeable.cost_price if self.cost_price.nil?
+      self.variant_price = lineitemeable.price if self.variant_price.nil?
+      self.cost_price = lineitemeable.cost_price if self.cost_price.nil?
       self.currency = lineitemeable.currency if currency.nil?
+    else
+      self.variant_price = 0.0 if self.variant_price.nil?
+      self.cost_price = 0.0 if self.cost_price.nil?
+      self.currency = 'USD' if currency.nil?
     end
   end
 
