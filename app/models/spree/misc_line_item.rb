@@ -7,6 +7,9 @@ class Spree::MiscLineItem < ActiveRecord::Base
   before_validation :copy_price
   before_validation :copy_tax_category
 
+  scope :eligible, -> { where(eligible: true) }
+  scope :promotion, -> { where(promotion: true) }
+
   def copy_price
     if self.has_variant?
       self.variant_price = lineitemeable.price if self.variant_price.nil?

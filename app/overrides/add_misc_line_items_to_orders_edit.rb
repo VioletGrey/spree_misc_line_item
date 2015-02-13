@@ -39,7 +39,7 @@ Deface::Override.new(
       </tbody>
     </table>
   <% end %>
-  <% if order.misc_line_items.any? %>
+  <% if order.misc_line_items.eligible.any? %>
     <fieldset class="no-border-bottom">
       <legend align="center">
         Misc Line Items
