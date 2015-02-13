@@ -3,3 +3,8 @@
 
 en:
   hello: "Hello world"
+  spree:
+    promotion_action_types:
+      create_misc_line_items:
+        description: Add Misc Line Items to cart
+        name: Create Gift With Purchase

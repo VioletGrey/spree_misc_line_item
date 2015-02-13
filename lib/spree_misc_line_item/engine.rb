@@ -11,6 +11,10 @@ module SpreeMiscLineItem
       g.test_framework :rspec
     end
 
+    initializer 'spree.promo.register.promotions.actions' do |app|
+      app.config.spree.promotions.actions += [Spree::Promotion::Actions::CreateMiscLineItems]
+    end
+
     def self.activate
       Dir.glob(File.join(File.dirname(__FILE__), '../../app/**/*_decorator*.rb')) do |c|
         Rails.configuration.cache_classes ? require(c) : load(c)
