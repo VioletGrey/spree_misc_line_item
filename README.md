@@ -4,9 +4,6 @@ Spree Miscellaneous Line Items
 Adds ability to add Miscellaneous items to order which are tagged as LineItemeable.
 Also adds new promotion action to add misc line items to Order
 
-![alt text](https://www.dropbox.com/s/ffrjuf3iq5mnq01/Screenshot%202015-02-13%2013.56.30.png "Promotions")
-
-
 Installation
 ------------
 
