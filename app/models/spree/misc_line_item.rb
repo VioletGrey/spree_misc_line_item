@@ -42,6 +42,10 @@ class Spree::MiscLineItem < ActiveRecord::Base
   end
   alias single_display_amount single_money
 
+  def display_variant_price
+    Spree::Money.new(variant_price, { currency: currency })
+  end
+
   def money
     Spree::Money.new(amount, { currency: currency })
   end
