@@ -31,7 +31,8 @@ module Spree
                 eligible: true,
                 promotion: true,
                 name: item.name,
-                lineitemeable: item.variant
+                lineitemeable: item.variant,
+                description: self.preferred_callout
               })
             end
           end
