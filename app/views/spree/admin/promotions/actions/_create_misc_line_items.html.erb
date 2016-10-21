@@ -31,3 +31,18 @@
     </div>
   <% end %>
 <% end %>
+
+<div class="row">
+  <% unless promotion_action.new_record? %>
+    <div class="settings field omega four columns">
+      <% promotion_action.preferences.keys.map do |key| %>
+        <% field_name = "#{param_prefix}[preferred_#{key}]" %>
+        <%= label_tag field_name, Spree.t(key.to_s) %>
+        <%= preference_field_tag(field_name,
+                                 promotion_action.get_preference(key),
+                                 :type => promotion_action.preference_type(key)) %>
+      <% end %>
+      <%= hidden_field_tag "#{param_prefix}[id]", promotion_action.id %>
+    </div>
+  <% end %>
+</div>

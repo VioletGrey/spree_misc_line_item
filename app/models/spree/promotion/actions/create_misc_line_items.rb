@@ -7,6 +7,8 @@ module Spree
 
         delegate :eligible?, :to => :promotion
 
+        preference :callout, :string, default: ""
+
         attr_accessor :order
 
         def perform(options = {})
@@ -29,7 +31,8 @@ module Spree
                 eligible: true,
                 promotion: true,
                 name: item.name,
-                lineitemeable: item.variant
+                lineitemeable: item.variant,
+                description: self.preferred_callout
               })
             end
           end
