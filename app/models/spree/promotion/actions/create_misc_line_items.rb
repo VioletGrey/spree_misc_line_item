@@ -25,7 +25,7 @@ module Spree
             if self.order.misc_line_items.promotion.pluck(:lineitemeable_id).include? item.variant_id
               next
             else
-              self.order.misc_line_items.create({
+              line_item = self.order.misc_line_items.build({
                 quantity: item.quantity,
                 price: item.price,
                 eligible: true,
@@ -34,6 +34,8 @@ module Spree
                 lineitemeable: item.variant,
                 description: self.preferred_callout
               })
+              next if line_item.insufficient_stock?
+              line_item.save
             end
           end
         end
